@@ -94,7 +94,7 @@ export function getQueryParam(name) {
  * @returns {string}
  */
 export function getReturnTarget(fallback) {
-  const allowed = new Set(['index.html', 'assignments.html', 'notes.html']);
+  const allowed = new Set(['index.html', 'assignments.html', 'notes.html', 'calendar.html']);
   const requested = getQueryParam('return');
   return requested !== null && allowed.has(requested) ? requested : fallback;
 }

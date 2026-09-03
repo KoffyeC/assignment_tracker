@@ -27,6 +27,13 @@ export const STORAGE_KEYS = Object.freeze({
   assignments: 'studentPlanner.assignments.v1',
   notes: 'studentPlanner.notes.v1',
   quickNote: 'studentPlanner.quickNote.v1',
+  settings: 'studentPlanner.settings.v1',
+});
+
+export const DEFAULT_SETTINGS = Object.freeze({
+  displayName: '',
+  weekStartsOn: 'sunday',
+  showCompletedOnCalendar: true,
 });
 
 /**
@@ -360,6 +367,50 @@ export function createStorage(backend) {
     }
   }
 
+  /* ------------------------------------------------------------------ */
+  /* Settings                                                            */
+  /* ------------------------------------------------------------------ */
+
+  /** @returns {{displayName: string, weekStartsOn: string, showCompletedOnCalendar: boolean}} */
+  function getSettings() {
+    let parsed;
+    try {
+      const raw = backend.getItem(STORAGE_KEYS.settings);
+      if (raw === null || raw === '') return { ...DEFAULT_SETTINGS };
+      parsed = JSON.parse(raw);
+    } catch {
+      return { ...DEFAULT_SETTINGS };
+    }
+
+    if (parsed === null || typeof parsed !== 'object' || Array.isArray(parsed)) {
+      return { ...DEFAULT_SETTINGS };
+    }
+
+    return {
+      displayName:
+        typeof parsed.displayName === 'string' ? parsed.displayName.trim().slice(0, 60) : '',
+      weekStartsOn: parsed.weekStartsOn === 'monday' ? 'monday' : 'sunday',
+      showCompletedOnCalendar: parsed.showCompletedOnCalendar !== false,
+    };
+  }
+
+  /**
+   * @param {object} input
+   * @returns {SuccessResult|FailureResult}
+   */
+  function saveSettings(input) {
+    const record = {
+      displayName:
+        typeof input?.displayName === 'string' ? input.displayName.trim().slice(0, 60) : '',
+      weekStartsOn: input?.weekStartsOn === 'monday' ? 'monday' : 'sunday',
+      showCompletedOnCalendar: input?.showCompletedOnCalendar !== false,
+    };
+
+    return write(STORAGE_KEYS.settings, record)
+      ? { ok: true, record }
+      : { ok: false, error: 'Settings could not be saved. Please try again.' };
+  }
+
   return {
     getAssignments,
     getAssignmentById,
@@ -375,6 +426,8 @@ export function createStorage(backend) {
     getQuickNote,
     setQuickNote,
     clearQuickNote,
+    getSettings,
+    saveSettings,
   };
 }
 

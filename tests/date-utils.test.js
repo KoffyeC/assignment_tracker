@@ -120,6 +120,13 @@ test('buildMonthGrid aligns the first day under its real weekday', () => {
   assert.deepEqual(grid.weeks[0][2], { iso: '2026-09-01', day: 1 });
 });
 
+test('buildMonthGrid can place Monday in the first calendar column', () => {
+  // 1 September 2026 is a Tuesday, so it follows one leading Monday blank.
+  const grid = buildMonthGrid(2026, 8, 1);
+  assert.equal(grid.weeks[0][0], null);
+  assert.deepEqual(grid.weeks[0][1], { iso: '2026-09-01', day: 1 });
+});
+
 test('buildMonthGrid emits whole weeks of seven cells', () => {
   for (const monthIndex of [0, 1, 3, 8, 11]) {
     const grid = buildMonthGrid(2026, monthIndex);

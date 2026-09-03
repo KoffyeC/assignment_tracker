@@ -1,0 +1,211 @@
+/* Full Calendar page — expands the compact Dashboard calendar language into
+   a functional month view while keeping the same cards, borders, and purple. */
+
+.calendar-header {
+  margin-bottom: var(--space-6);
+}
+
+.calendar-card {
+  padding: 0;
+  overflow: hidden;
+}
+
+.calendar-toolbar {
+  display: flex;
+  gap: var(--space-4);
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-5) var(--space-6);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.calendar-toolbar__month-controls {
+  display: flex;
+  gap: var(--space-3);
+  align-items: center;
+}
+
+.calendar-toolbar__title {
+  min-width: 175px;
+  font-size: 16px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.icon-button {
+  display: inline-flex;
+  width: 36px;
+  height: 36px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-md);
+  background-color: var(--color-surface);
+  color: var(--color-text-muted);
+  cursor: pointer;
+}
+
+.icon-button:hover {
+  background-color: var(--color-primary-soft);
+  border-color: #cfd2fa;
+  color: var(--color-primary);
+}
+
+.calendar-page__grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  min-width: 700px;
+}
+
+.calendar-page__weekday {
+  padding: var(--space-3) var(--space-2);
+  border-right: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+  color: var(--color-text-muted);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.calendar-page__weekday:nth-child(7) {
+  border-right: 0;
+}
+
+.calendar-page__day {
+  min-height: 116px;
+  padding: var(--space-2);
+  overflow: hidden;
+  border: 0;
+  border-right: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+  border-radius: 0;
+  background-color: var(--color-surface);
+  color: var(--color-text);
+  text-align: left;
+  cursor: pointer;
+}
+
+.calendar-page__day:nth-child(7n) {
+  border-right: 0;
+}
+
+.calendar-page__day:hover:not(.calendar-page__day--empty) {
+  background-color: #fafaff;
+}
+
+.calendar-page__day--empty {
+  background-color: #fafbfc;
+  cursor: default;
+}
+
+.calendar-page__day--selected {
+  background-color: var(--color-primary-soft);
+  box-shadow: inset 0 0 0 2px var(--color-primary);
+}
+
+.calendar-page__day-number {
+  display: inline-flex;
+  width: 28px;
+  height: 28px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 13px;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+
+.calendar-page__day--today .calendar-page__day-number {
+  background-color: var(--color-primary);
+  color: #ffffff;
+}
+
+.calendar-page__events {
+  display: grid;
+  gap: 5px;
+  margin-top: var(--space-1);
+}
+
+.calendar-event {
+  display: block;
+  padding: 4px 6px;
+  overflow: hidden;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1.25;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.calendar-event--completed {
+  opacity: 0.62;
+  text-decoration: line-through;
+}
+
+.calendar-page__more {
+  padding-inline: 4px;
+  color: var(--color-text-muted);
+  font-size: 11px;
+}
+
+.calendar-details {
+  margin-top: var(--space-6);
+}
+
+.calendar-detail-list {
+  margin-top: var(--space-3);
+  border-top: 1px solid var(--color-border);
+}
+
+.calendar-detail {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  gap: var(--space-5);
+  align-items: center;
+  padding: var(--space-4) 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.calendar-detail:last-child {
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+
+.calendar-detail__name {
+  font-weight: 500;
+}
+
+.calendar-detail__class {
+  margin-top: var(--space-1);
+  color: var(--color-text-muted);
+  font-size: 13px;
+}
+
+@media (max-width: 1080px) {
+  .calendar-card {
+    overflow-x: auto;
+  }
+}
+
+@media (max-width: 600px) {
+  .calendar-toolbar {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .calendar-toolbar__month-controls {
+    justify-content: space-between;
+  }
+
+  .calendar-detail {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
+  .calendar-detail .btn-link {
+    grid-column: 1 / -1;
+    justify-self: start;
+  }
+}

@@ -149,18 +149,18 @@ textarea {
   align-items: stretch;
 }
 
-/* Section-nav placeholder. Programmer 2 replaces this with the shared sidebar
-   (Calendar, Settings, Log Out and app-wide active highlighting). It carries
-   only the links between Programmer 1's own pages. */
 .sidebar {
   flex: 0 0 var(--sidebar-width);
   width: var(--sidebar-width);
+  display: flex;
+  flex-direction: column;
   padding: var(--space-7) var(--space-5);
   background-color: var(--color-surface);
   border-right: 1px solid var(--color-border);
 }
 
 .sidebar__brand {
+  display: block;
   margin-bottom: var(--space-7);
   padding-inline: var(--space-3);
   color: var(--color-primary);
@@ -169,13 +169,35 @@ textarea {
   letter-spacing: -0.01em;
 }
 
+.sidebar__brand:hover {
+  text-decoration: none;
+}
+
+.sidebar__nav {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+}
+
+.sidebar__links {
+  display: grid;
+  gap: var(--space-1);
+}
+
 .sidebar__link {
-  display: block;
-  margin-bottom: var(--space-1);
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: var(--space-3);
   padding: var(--space-3);
+  border: 0;
   border-radius: var(--radius-md);
+  background: transparent;
   color: var(--color-text);
   font-size: 14px;
+  line-height: 1.4;
+  text-align: left;
+  cursor: pointer;
 }
 
 .sidebar__link:hover {
@@ -187,6 +209,26 @@ textarea {
   background-color: var(--color-primary-soft);
   color: var(--color-primary);
   font-weight: 500;
+}
+
+.sidebar__icon {
+  display: inline-flex;
+  width: 18px;
+  align-items: center;
+  justify-content: center;
+  color: currentColor;
+  font-size: 16px;
+  line-height: 1;
+}
+
+.sidebar__footer {
+  margin-top: auto;
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--color-border);
+}
+
+.sidebar__logout {
+  color: var(--color-text-muted);
 }
 
 .app-main {
@@ -207,6 +249,18 @@ textarea {
 .page-title {
   font-size: 16px;
   font-weight: 500;
+}
+
+.page-title--large {
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.page-subtitle {
+  margin-top: var(--space-2);
+  color: var(--color-text-muted);
+  font-size: 14px;
 }
 
 /* "← Add Assignment" style back control at the top of the form pages. */
@@ -290,6 +344,10 @@ textarea {
 
 .btn--secondary:hover:not(:disabled) {
   background-color: #f7f7fa;
+}
+
+.btn--compact {
+  padding: 9px 15px;
 }
 
 .btn:disabled,
@@ -444,6 +502,11 @@ textarea {
   color: var(--color-low-text);
 }
 
+.badge--completed {
+  background-color: #eef0f3;
+  color: var(--color-text-muted);
+}
+
 /* --------------------------------------------------------------------------
    Assignment row
    Shared component: the Dashboard's Upcoming list and the Assignments page
@@ -549,6 +612,22 @@ textarea {
   font-size: 14px;
 }
 
+.status-message {
+  margin-bottom: var(--space-5);
+  padding: var(--space-3) var(--space-4);
+  background-color: var(--color-low-bg);
+  border: 1px solid #bfe8cc;
+  border-radius: var(--radius-md);
+  color: var(--color-low-text);
+  font-size: 14px;
+}
+
+.status-message--error {
+  background-color: var(--color-danger-soft);
+  border-color: #fbd3ce;
+  color: var(--color-danger);
+}
+
 .link-arrow {
   font-size: 14px;
   font-weight: 500;
@@ -573,23 +652,58 @@ textarea {
   }
 
   .sidebar__brand {
-    margin-bottom: var(--space-4);
+    margin-bottom: var(--space-3);
     padding-inline: 0;
   }
 
   .sidebar__nav {
     display: flex;
+    flex-direction: row;
     flex-wrap: wrap;
     gap: var(--space-2);
   }
 
+  .sidebar__links {
+    display: flex;
+    flex: 1 1 auto;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+
+  .sidebar__footer {
+    margin-top: 0;
+    padding-top: 0;
+    border-top: 0;
+  }
+
   .sidebar__link {
-    margin-bottom: 0;
+    width: auto;
     padding: var(--space-2) var(--space-3);
+  }
+
+  .sidebar__logout {
+    width: auto;
   }
 
   .app-main {
     padding: var(--space-6) var(--space-5);
+  }
+}
+
+@media (max-width: 620px) {
+  .sidebar__nav {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    padding-bottom: var(--space-1);
+  }
+
+  .sidebar__links {
+    flex: 0 0 auto;
+    flex-wrap: nowrap;
+  }
+
+  .sidebar__link {
+    white-space: nowrap;
   }
 }
 

@@ -17,8 +17,8 @@ import { el } from './dom.js';
  * @param {Date} [now]
  * @returns {HTMLElement} the widget body, ready to insert into its card.
  */
-export function renderCalendarWidget(assignments, now = new Date()) {
-  const grid = buildMonthGrid(now.getFullYear(), now.getMonth());
+export function renderCalendarWidget(assignments, now = new Date(), weekStartsOn = 0) {
+  const grid = buildMonthGrid(now.getFullYear(), now.getMonth(), weekStartsOn);
   const dueCounts = assignmentCountsByDueDate(assignments);
   const today = todayISODate(now);
 
@@ -26,11 +26,12 @@ export function renderCalendarWidget(assignments, now = new Date()) {
 
   // Weekday initials repeat letters (S, T, S, T), so each carries its full name
   // for screen readers while the visible text stays a single character.
-  WEEKDAY_INITIALS.forEach((initial, index) => {
+  const weekdayIndices = Array.from({ length: 7 }, (_, index) => (index + weekStartsOn) % 7);
+  weekdayIndices.forEach((weekdayIndex) => {
     cells.push(
       el('div', { class: 'calendar-grid__weekday', role: 'columnheader' }, [
-        el('span', { 'aria-hidden': 'true', text: initial }),
-        el('span', { class: 'visually-hidden', text: WEEKDAY_NAMES[index] }),
+        el('span', { 'aria-hidden': 'true', text: WEEKDAY_INITIALS[weekdayIndex] }),
+        el('span', { class: 'visually-hidden', text: WEEKDAY_NAMES[weekdayIndex] }),
       ]),
     );
   });

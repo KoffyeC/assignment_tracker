@@ -67,6 +67,37 @@ export function assignmentCountsByDueDate(assignments) {
 }
 
 /**
+ * Group assignments by their due-date string for the full Calendar page.
+ * The original records are preserved and each date's list is sorted by
+ * priority, then title, so the Calendar agrees with the rest of the planner.
+ *
+ * @param {object[]} assignments
+ * @param {{includeCompleted?: boolean}} [options]
+ * @returns {Map<string, object[]>}
+ */
+export function assignmentsByDueDate(assignments, options = {}) {
+  const includeCompleted = options.includeCompleted !== false;
+  const grouped = new Map();
+
+  for (const item of toArray(assignments)) {
+    if (parseISODate(item.dueDate) === null) continue;
+    if (!includeCompleted && item.completed === true) continue;
+
+    const items = grouped.get(item.dueDate) ?? [];
+    items.push(item);
+    grouped.set(item.dueDate, items);
+  }
+
+  for (const items of grouped.values()) {
+    items.sort((a, b) => {
+      const priorityDiff = prioritySortRank(a.priority) - prioritySortRank(b.priority);
+      return priorityDiff !== 0 ? priorityDiff : String(a.name).localeCompare(String(b.name));
+    });
+  }
+  return grouped;
+}
+
+/**
  * Every distinct class name already in use, alphabetically.
  *
  * Feeds the Class field's suggestion list so a student can pick a class they

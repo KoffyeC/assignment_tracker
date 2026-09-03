@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Settings · Student Planner</title>
+    <link rel="stylesheet" href="css/shared.css" />
+    <link rel="stylesheet" href="css/settings.css" />
+  </head>
+  <body data-section="settings">
+    <div class="app">
+      <aside class="sidebar"></aside>
+
+      <main class="app-main">
+        <div class="page-header settings-header">
+          <div>
+            <h1 class="page-title">Settings</h1>
+            <p class="page-subtitle">Personalize your planner.</p>
+          </div>
+        </div>
+
+        <p class="status-message" id="settings-message" role="status" hidden></p>
+
+        <form class="card settings-form" id="settings-form">
+          <section class="settings-section" aria-labelledby="profile-heading">
+            <div class="settings-section__heading">
+              <h2 class="card__title" id="profile-heading">Profile</h2>
+              <p class="settings-section__description">Used in your Dashboard greeting.</p>
+            </div>
+            <div class="form__field settings-form__control">
+              <label class="form__label" for="displayName">Display name</label>
+              <input
+                class="form__control"
+                id="displayName"
+                name="displayName"
+                type="text"
+                maxlength="60"
+                placeholder="Your name"
+                autocomplete="name"
+              />
+            </div>
+          </section>
+
+          <section class="settings-section" aria-labelledby="calendar-settings-heading">
+            <div class="settings-section__heading">
+              <h2 class="card__title" id="calendar-settings-heading">Calendar</h2>
+              <p class="settings-section__description">Choose how dates and assignments appear.</p>
+            </div>
+            <div class="settings-form__control">
+              <div class="form__field">
+                <label class="form__label" for="weekStartsOn">First day of the week</label>
+                <select class="form__control" id="weekStartsOn" name="weekStartsOn">
+                  <option value="sunday">Sunday</option>
+                  <option value="monday">Monday</option>
+                </select>
+              </div>
+              <label class="checkbox-row" for="showCompletedOnCalendar">
+                <input
+                  id="showCompletedOnCalendar"
+                  name="showCompletedOnCalendar"
+                  type="checkbox"
+                />
+                <span>
+                  <strong>Show completed assignments</strong>
+                  <small>Keep completed work visible on its original due date.</small>
+                </span>
+              </label>
+            </div>
+          </section>
+
+          <div class="settings-actions">
+            <button class="btn btn--primary" type="submit">Save Settings</button>
+          </div>
+        </form>
+      </main>
+    </div>
+
+    <script type="module" src="js/app-shell.js"></script>
+    <script type="module" src="js/settings.js"></script>
+  </body>
+</html>
