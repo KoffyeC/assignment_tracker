@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Add Note · Student Planner</title>
+    <link rel="stylesheet" href="css/shared.css" />
+  </head>
+  <body>
+    <div class="app">
+      <!-- Section-nav placeholder — see index.html. Section 7 is Programmer 2's. -->
+      <aside class="sidebar">
+        <p class="sidebar__brand">Student Planner</p>
+        <nav class="sidebar__nav" aria-label="Sections">
+          <a class="sidebar__link" href="index.html">⌂ Dashboard</a>
+          <a class="sidebar__link" href="assignments.html">▣ Assignments</a>
+          <a class="sidebar__link" href="notes.html" aria-current="page">▤ Notes</a>
+        </nav>
+      </aside>
+
+      <main class="app-main">
+        <a class="back-link" id="back-link" href="notes.html">← Add Note</a>
+        <h1 class="visually-hidden" id="page-heading">Add Note</h1>
+
+        <p class="form-message" id="form-message" role="alert" hidden></p>
+
+        <form class="form form--wide" id="note-form" novalidate>
+          <div class="form__field">
+            <label class="form__label" for="title">Note Title</label>
+            <input
+              class="form__control"
+              id="title"
+              name="title"
+              type="text"
+              placeholder="e.g. Coding 3 Study Guide"
+              maxlength="120"
+              autocomplete="off"
+              aria-describedby="title-error"
+            />
+            <p class="field-error" id="title-error" hidden></p>
+          </div>
+
+          <div class="form__field">
+            <label class="form__label" for="content">Note Content</label>
+            <textarea
+              class="form__control form__control--textarea"
+              id="content"
+              name="content"
+              maxlength="20000"
+              aria-describedby="content-error"
+            ></textarea>
+            <p class="field-error" id="content-error" hidden></p>
+          </div>
+
+          <div class="form__actions">
+            <a class="btn btn--secondary" id="cancel-link" href="notes.html">Cancel</a>
+            <button class="btn btn--primary" id="save-button" type="submit">Save Note</button>
+          </div>
+        </form>
+      </main>
+    </div>
+
+    <script type="module" src="js/note-form.js"></script>
+  </body>
+</html>

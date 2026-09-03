@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Assignments · Student Planner</title>
+    <link rel="stylesheet" href="css/shared.css" />
+    <link rel="stylesheet" href="css/assignments.css" />
+  </head>
+  <body>
+    <div class="app">
+      <!-- Section-nav placeholder — see index.html. Section 7 is Programmer 2's. -->
+      <aside class="sidebar">
+        <p class="sidebar__brand">Student Planner</p>
+        <nav class="sidebar__nav" aria-label="Sections">
+          <a class="sidebar__link" href="index.html">⌂ Dashboard</a>
+          <a class="sidebar__link" href="assignments.html" aria-current="page">▣ Assignments</a>
+          <a class="sidebar__link" href="notes.html">▤ Notes</a>
+        </nav>
+      </aside>
+
+      <main class="app-main">
+        <div class="page-header">
+          <h1 class="page-title">My Assignments</h1>
+          <a class="btn btn--primary" href="assignment-form.html?return=assignments.html">
+            + Add Assignment
+          </a>
+        </div>
+
+        <p class="form-message" id="page-message" role="alert" hidden></p>
+
+        <section class="assignments-section" aria-labelledby="active-heading">
+          <div class="card">
+            <div class="card__header">
+              <h2 class="card__title" id="active-heading">Upcoming Assignments</h2>
+              <p class="assignments-count" id="active-count"></p>
+            </div>
+            <div id="active-assignments"></div>
+          </div>
+        </section>
+
+        <section
+          class="assignments-section assignments-section--completed"
+          id="completed"
+          aria-labelledby="completed-heading"
+        >
+          <div class="card">
+            <div class="card__header">
+              <h2 class="card__title" id="completed-heading">Completed Assignments</h2>
+              <p class="assignments-count" id="completed-count"></p>
+            </div>
+            <div id="completed-assignments"></div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script type="module" src="js/assignments.js"></script>
+  </body>
+</html>

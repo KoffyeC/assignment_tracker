@@ -1,0 +1,196 @@
+/* ==========================================================================
+   Section 1 — Dashboard layout
+   Two rows: (Upcoming Assignments | Calendar + Quick Note) then
+   (Completed Assignments | Recent Notes).
+   ========================================================================== */
+
+.greeting {
+  margin-bottom: var(--space-6);
+}
+
+.greeting__title {
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.greeting__subtitle {
+  margin-top: var(--space-3);
+  font-size: 14px;
+}
+
+.dashboard-row {
+  display: grid;
+  gap: var(--space-6);
+  align-items: start;
+  margin-bottom: var(--space-6);
+}
+
+/* Wide main column beside a narrower calendar / quick-note stack. */
+.dashboard-row--primary {
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 340px);
+}
+
+.dashboard-row--secondary {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.dashboard-aside {
+  display: grid;
+  gap: var(--space-6);
+}
+
+/* --------------------------------------------------------------------------
+   Calendar widget (Dashboard only — read-only)
+   The full Calendar page is Programmer 2's and is not built here.
+   -------------------------------------------------------------------------- */
+
+/* The Calendar card has a bare heading rather than a .card__header row, so it
+   needs the header's breathing room added back. */
+.dashboard-aside .card__title {
+  margin-bottom: var(--space-4);
+}
+
+.calendar-widget__month {
+  margin-bottom: var(--space-4);
+  font-size: 14px;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: var(--space-1);
+}
+
+.calendar-grid__weekday {
+  padding-bottom: var(--space-2);
+  color: var(--color-text-muted);
+  font-size: 12px;
+  font-weight: 500;
+  text-align: center;
+}
+
+.calendar-day {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+}
+
+.calendar-day--empty {
+  visibility: hidden;
+}
+
+/* A day with assignments due: indigo numeral plus a dot, so the state is not
+   carried by colour alone. Each marked day also has an accessible label. */
+.calendar-day--due {
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+.calendar-day--due::after {
+  content: '';
+  position: absolute;
+  bottom: 2px;
+  left: 50%;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background-color: currentColor;
+  transform: translateX(-50%);
+}
+
+.calendar-day--today {
+  background-color: var(--color-primary);
+  color: #ffffff;
+  font-weight: 600;
+}
+
+/* --------------------------------------------------------------------------
+   Quick Note card (display-only)
+   -------------------------------------------------------------------------- */
+
+.quick-note {
+  background-color: var(--color-quicknote-bg);
+  border-color: var(--color-quicknote-border);
+}
+
+.quick-note__title {
+  margin-bottom: var(--space-3);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.quick-note__body {
+  font-size: 14px;
+  line-height: 1.6;
+  white-space: pre-wrap; /* keeps the student's own line breaks */
+}
+
+/* --------------------------------------------------------------------------
+   Completed Assignments + Recent Notes summaries
+   -------------------------------------------------------------------------- */
+
+.summary-list {
+  margin-top: var(--space-4);
+}
+
+.summary-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-4);
+  align-items: baseline;
+  padding: var(--space-3) 0;
+}
+
+.summary-row__label {
+  font-size: 14px;
+}
+
+.summary-row__meta {
+  color: var(--color-text-muted);
+  font-size: 14px;
+}
+
+.note-summary {
+  padding: var(--space-3) 0;
+}
+
+.note-summary__title {
+  font-size: 14px;
+}
+
+.note-summary__meta {
+  margin-top: var(--space-1);
+  color: var(--color-text-muted);
+  font-size: 13px;
+}
+
+/* --------------------------------------------------------------------------
+   Responsive: collapse to a single column before anything can overlap.
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 1100px) {
+  .dashboard-row--primary,
+  .dashboard-row--secondary {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .dashboard-aside {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .dashboard-aside {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .summary-row {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-1);
+  }
+}

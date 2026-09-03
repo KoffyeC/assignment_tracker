@@ -1,0 +1,66 @@
+/* ==========================================================================
+   Section 3 — Notes page
+   Two-column card grid on desktop, collapsing to one column when the cards
+   would otherwise be squeezed.
+   ========================================================================== */
+
+/* Two equal columns filling the content width, as in the design. Cards stretch
+   to the tallest in their row so a short note does not leave a ragged edge. */
+.notes-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-6);
+}
+
+.note-card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.note-card__title {
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.note-card__meta {
+  margin-top: var(--space-2);
+  color: var(--color-text-muted);
+  font-size: 13px;
+}
+
+/* Preview text is clipped for display only; the saved note is untouched. */
+.note-card__preview {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  overflow: hidden;
+  margin-top: var(--space-5);
+  min-height: 42px;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.note-card__preview--empty {
+  color: var(--color-text-subtle);
+  font-style: italic;
+}
+
+/* `margin-top: auto` pins the actions to the bottom of a stretched card, so
+   Edit and Delete line up across the row. */
+.note-card__actions {
+  display: flex;
+  gap: var(--space-4);
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+  padding-top: var(--space-6);
+}
+
+/* Below this width two columns would squeeze the previews, so stack them. */
+@media (max-width: 900px) {
+  .notes-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

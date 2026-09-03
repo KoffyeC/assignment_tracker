@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Add Assignment · Student Planner</title>
+    <link rel="stylesheet" href="css/shared.css" />
+  </head>
+  <body>
+    <div class="app">
+      <!-- Section-nav placeholder — see index.html. Section 7 is Programmer 2's. -->
+      <aside class="sidebar">
+        <p class="sidebar__brand">Student Planner</p>
+        <nav class="sidebar__nav" aria-label="Sections">
+          <a class="sidebar__link" href="index.html">⌂ Dashboard</a>
+          <a class="sidebar__link" href="assignments.html" aria-current="page">▣ Assignments</a>
+          <a class="sidebar__link" href="notes.html">▤ Notes</a>
+        </nav>
+      </aside>
+
+      <main class="app-main">
+        <a class="back-link" id="back-link" href="assignments.html">← Add Assignment</a>
+        <h1 class="visually-hidden" id="page-heading">Add Assignment</h1>
+
+        <p class="form-message" id="form-message" role="alert" hidden></p>
+
+        <!-- novalidate: validation is done in JS so every field shows the same
+             styled, screen-reader-announced message instead of a browser popup. -->
+        <form class="form" id="assignment-form" novalidate>
+          <div class="form__field">
+            <label class="form__label" for="name">Assignment Name</label>
+            <input
+              class="form__control"
+              id="name"
+              name="name"
+              type="text"
+              placeholder="e.g. Project #2"
+              maxlength="120"
+              autocomplete="off"
+              aria-describedby="name-error"
+            />
+            <p class="field-error" id="name-error" hidden></p>
+          </div>
+
+          <div class="form__field">
+            <label class="form__label" for="class">Class</label>
+            <!-- Free text with suggestions drawn from classes already used, so
+                 picking an existing class is easy without inventing a separate
+                 class-management feature. -->
+            <input
+              class="form__control"
+              id="class"
+              name="class"
+              type="text"
+              list="class-options"
+              placeholder="Select a class"
+              maxlength="80"
+              autocomplete="off"
+              aria-describedby="class-error"
+            />
+            <datalist id="class-options"></datalist>
+            <p class="field-error" id="class-error" hidden></p>
+          </div>
+
+          <div class="form__row">
+            <div class="form__field">
+              <label class="form__label" for="dueDate">Due Date</label>
+              <input
+                class="form__control"
+                id="dueDate"
+                name="dueDate"
+                type="date"
+                aria-describedby="dueDate-error"
+              />
+              <p class="field-error" id="dueDate-error" hidden></p>
+            </div>
+
+            <div class="form__field">
+              <label class="form__label" for="priority">Priority</label>
+              <select class="form__control" id="priority" name="priority" aria-describedby="priority-error">
+                <option value="High">High</option>
+                <option value="Medium" selected>Medium</option>
+                <option value="Low">Low</option>
+              </select>
+              <p class="field-error" id="priority-error" hidden></p>
+            </div>
+          </div>
+
+          <div class="form__actions">
+            <a class="btn btn--secondary" id="cancel-link" href="assignments.html">Cancel</a>
+            <button class="btn btn--primary" id="save-button" type="submit">Save Assignment</button>
+          </div>
+        </form>
+      </main>
+    </div>
+
+    <script type="module" src="js/assignment-form.js"></script>
+  </body>
+</html>

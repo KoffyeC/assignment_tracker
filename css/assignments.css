@@ -1,0 +1,45 @@
+/* ==========================================================================
+   Section 2 — Assignments page
+   Reuses .assignment-row from shared.css and widens the grid with an actions
+   column for Complete / Edit / Delete.
+   ========================================================================== */
+
+.assignments-section {
+  margin-bottom: var(--space-6);
+}
+
+.assignments-section .assignment-row {
+  --assignment-row-columns: minmax(0, 1fr) 132px 96px 200px;
+}
+
+/* Completed rows drop the priority badge, so they need one column fewer. */
+.assignments-section--completed .assignment-row {
+  --assignment-row-columns: minmax(0, 1fr) 132px 200px;
+}
+
+.assignments-count {
+  color: var(--color-text-muted);
+  font-size: 13px;
+}
+
+/* Target of "View all completed →": a brief highlight confirms the jump. */
+.assignments-section:target {
+  scroll-margin-top: var(--space-6);
+}
+
+.assignments-section:target .card {
+  border-color: var(--color-primary);
+}
+
+@media (max-width: 1000px) {
+  .assignments-section .assignment-row,
+  .assignments-section--completed .assignment-row {
+    --assignment-row-columns: minmax(0, 1fr) 132px 96px;
+  }
+
+  .assignments-section .assignment-row__actions {
+    grid-column: 1 / -1;
+    justify-content: flex-start;
+    margin-top: var(--space-2);
+  }
+}

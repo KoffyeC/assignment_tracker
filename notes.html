@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Notes · Student Planner</title>
+    <link rel="stylesheet" href="css/shared.css" />
+    <link rel="stylesheet" href="css/notes.css" />
+  </head>
+  <body>
+    <div class="app">
+      <!-- Section-nav placeholder — see index.html. Section 7 is Programmer 2's. -->
+      <aside class="sidebar">
+        <p class="sidebar__brand">Student Planner</p>
+        <nav class="sidebar__nav" aria-label="Sections">
+          <a class="sidebar__link" href="index.html">⌂ Dashboard</a>
+          <a class="sidebar__link" href="assignments.html">▣ Assignments</a>
+          <a class="sidebar__link" href="notes.html" aria-current="page">▤ Notes</a>
+        </nav>
+      </aside>
+
+      <main class="app-main">
+        <div class="page-header">
+          <h1 class="page-title">My Notes</h1>
+          <a class="btn btn--primary" href="note-form.html?return=notes.html">+ Add Note</a>
+        </div>
+
+        <p class="form-message" id="page-message" role="alert" hidden></p>
+
+        <div class="notes-grid" id="notes-grid"></div>
+      </main>
+    </div>
+
+    <script type="module" src="js/notes.js"></script>
+  </body>
+</html>

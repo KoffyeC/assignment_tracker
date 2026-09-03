@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Dashboard · Student Planner</title>
+    <link rel="stylesheet" href="css/shared.css" />
+    <link rel="stylesheet" href="css/dashboard.css" />
+  </head>
+  <body>
+    <div class="app">
+      <!--
+        Section-nav placeholder (Programmer 1 scope only).
+        The shared app-wide sidebar is Section 7 and belongs to Programmer 2:
+        Calendar, Settings, Log Out and the active-link system are added there.
+        This block exists only so the Dashboard, Assignments and Notes pages can
+        reach one another.
+      -->
+      <aside class="sidebar">
+        <p class="sidebar__brand">Student Planner</p>
+        <nav class="sidebar__nav" aria-label="Sections">
+          <a class="sidebar__link" href="index.html" aria-current="page">⌂ Dashboard</a>
+          <a class="sidebar__link" href="assignments.html">▣ Assignments</a>
+          <a class="sidebar__link" href="notes.html">▤ Notes</a>
+        </nav>
+      </aside>
+
+      <main class="app-main">
+        <h1 class="visually-hidden">Dashboard</h1>
+
+        <div class="greeting">
+          <p class="greeting__title" id="greeting">Hello!</p>
+          <p class="greeting__subtitle">Here's what's coming up.</p>
+        </div>
+
+        <div class="dashboard-row dashboard-row--primary">
+          <section class="card" aria-labelledby="upcoming-heading">
+            <div class="card__header">
+              <h2 class="card__title" id="upcoming-heading">Upcoming Assignments</h2>
+              <a class="btn btn--primary" href="assignment-form.html?return=index.html">
+                + Add Assignment
+              </a>
+            </div>
+            <div id="upcoming-assignments"></div>
+          </section>
+
+          <div class="dashboard-aside">
+            <section class="card" aria-labelledby="calendar-heading">
+              <h2 class="card__title" id="calendar-heading">Calendar</h2>
+              <div id="calendar-widget"></div>
+            </section>
+
+            <section class="card quick-note" aria-labelledby="quick-note-heading">
+              <h2 class="quick-note__title" id="quick-note-heading">📝 Quick Note</h2>
+              <div id="quick-note"></div>
+            </section>
+          </div>
+        </div>
+
+        <div class="dashboard-row dashboard-row--secondary">
+          <section class="card" aria-labelledby="completed-heading">
+            <h2 class="card__title" id="completed-heading">Completed Assignments</h2>
+            <div id="completed-assignments"></div>
+            <div class="card__footer">
+              <a class="link-arrow" href="assignments.html#completed">View all completed →</a>
+            </div>
+          </section>
+
+          <section class="card" aria-labelledby="recent-notes-heading">
+            <h2 class="card__title" id="recent-notes-heading">Recent Notes</h2>
+            <div id="recent-notes"></div>
+            <div class="card__footer">
+              <a class="link-arrow" href="notes.html">View all notes →</a>
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
+
+    <script type="module" src="js/dashboard.js"></script>
+  </body>
+</html>
