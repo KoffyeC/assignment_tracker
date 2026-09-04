@@ -192,11 +192,12 @@ export function formatUpdatedRelative(timestamp, now = new Date()) {
  * @returns {{year: number, monthIndex: number, label: string,
  *            weeks: Array<Array<{iso: string, day: number}|null>>}}
  */
-export function buildMonthGrid(year, monthIndex) {
+export function buildMonthGrid(year, monthIndex, weekStartsOn = 0) {
   // Day 0 of the next month is the last day of this one; this also handles
   // February in leap years without a special case.
   const daysInMonth = new Date(year, monthIndex + 1, 0).getDate();
-  const firstWeekday = new Date(year, monthIndex, 1).getDay();
+  const normalizedWeekStart = weekStartsOn === 1 ? 1 : 0;
+  const firstWeekday = (new Date(year, monthIndex, 1).getDay() - normalizedWeekStart + 7) % 7;
 
   /** @type {Array<{iso: string, day: number}|null>} */
   const cells = [];

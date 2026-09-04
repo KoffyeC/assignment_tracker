@@ -1,0 +1,130 @@
+.settings-header {
+  margin-bottom: var(--space-6);
+}
+
+.settings-form {
+  max-width: 860px;
+  padding: 0;
+}
+
+.settings-section {
+  display: grid;
+  grid-template-columns: minmax(180px, 0.8fr) minmax(260px, 1.2fr);
+  gap: var(--space-8);
+  padding: var(--space-6);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.settings-section__description {
+  max-width: 260px;
+  margin-top: var(--space-2);
+  color: var(--color-text-muted);
+  font-size: 13px;
+}
+
+.settings-form__control {
+  max-width: 420px;
+}
+
+.settings-form__control.form__field,
+.settings-form__control .form__field {
+  margin-bottom: 0;
+}
+
+.checkbox-row {
+  display: flex;
+  gap: var(--space-3);
+  align-items: flex-start;
+  margin-top: var(--space-5);
+  cursor: pointer;
+}
+
+.checkbox-row input {
+  width: 17px;
+  height: 17px;
+  margin: 3px 0 0;
+  accent-color: var(--color-primary);
+}
+
+.checkbox-row strong,
+.checkbox-row small {
+  display: block;
+}
+
+.checkbox-row strong {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.checkbox-row small {
+  margin-top: var(--space-1);
+  color: var(--color-text-muted);
+  font-size: 13px;
+}
+
+.settings-actions {
+  display: flex;
+  justify-content: flex-end;
+  padding: var(--space-5) var(--space-6);
+}
+
+.login-page {
+  display: grid;
+  place-items: center;
+  padding: var(--space-6);
+  background-color: var(--color-page);
+}
+
+.login-shell {
+  width: 100%;
+  max-width: 430px;
+}
+
+.login-card {
+  padding: var(--space-8);
+  text-align: center;
+}
+
+.login-card__brand {
+  color: var(--color-primary);
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.login-card__title {
+  margin-top: var(--space-7);
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.login-card__description {
+  margin-top: var(--space-3);
+  color: var(--color-text-muted);
+}
+
+.login-card .status-message {
+  margin-top: var(--space-5);
+  margin-bottom: 0;
+}
+
+.login-card__button {
+  width: 100%;
+  margin-top: var(--space-6);
+}
+
+.login-card__note {
+  margin-top: var(--space-5);
+  color: var(--color-text-muted);
+  font-size: 12px;
+}
+
+@media (max-width: 680px) {
+  .settings-section {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-5);
+  }
+
+  .settings-actions .btn {
+    width: 100%;
+  }
+}

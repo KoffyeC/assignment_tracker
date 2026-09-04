@@ -1,30 +1,25 @@
 # Student Planner
 
-A student assignment and note planner built with semantic HTML5, CSS, and vanilla
+A student assignment, note, and calendar planner built with semantic HTML5, CSS, and vanilla
 JavaScript (ES modules). No frameworks, no build step, no dependencies.
 
 ## Scope
 
-This repository currently contains **Programmer 1's** work only:
+The shared Programmer 2 scope is now integrated with the original planner:
 
 | Section | Status | Owner |
 | --- | --- | --- |
 | 1. Dashboard | Implemented | Programmer 1 |
 | 2. Assignments | Implemented | Programmer 1 |
 | 3. Notes | Implemented | Programmer 1 |
-| 4. Full Calendar page | Not started | Programmer 2 |
-| 5. Settings | Not started | Programmer 2 |
-| 6. Log Out | Not started | Programmer 2 |
-| 7. Shared sidebar / app-wide navigation | Not started | Programmer 2 |
+| 4. Full Calendar page | Implemented | Programmer 2 |
+| 5. Settings | Implemented | Programmer 2 |
+| 6. Log Out | Implemented | Programmer 2 |
+| 7. Shared sidebar / app-wide navigation | Implemented | Programmer 2 |
 
-Sections 1–3 are usable on their own. The small read-only calendar **widget** on
-the Dashboard is part of Section 1; the full Calendar **page** is Section 4 and
-has deliberately not been built.
-
-Each page carries a minimal `<nav>` linking only the three Programmer 1 pages,
-marked in the markup as a placeholder. Programmer 2 replaces that block with the
-real shared sidebar (Calendar, Settings, Log Out, and app-wide active-link
-handling).
+The small read-only calendar **widget** on the Dashboard remains part of Section
+1. The full Calendar page adds month navigation, date selection, and due-date
+details while using the same assignment records.
 
 ## Running
 
@@ -54,9 +49,12 @@ Uses Node's built-in test runner — no framework is installed.
 | `assignment-form.html` | Add assignment; `?id=<id>` switches it to edit |
 | `notes.html` | Note cards |
 | `note-form.html` | Add note; `?id=<id>` switches it to edit |
+| `calendar.html` | Navigable month calendar and assignment due dates |
+| `settings.html` | Greeting and calendar preferences |
+| `login.html` | Local project session screen shown after Log Out |
 
 Both form pages also accept `?return=<page>` to control where Back and Cancel
-go. Only `index.html`, `assignments.html`, and `notes.html` are accepted.
+go. Only planner pages are accepted.
 
 ## Architecture
 
@@ -71,6 +69,8 @@ js/
   dom.js             small render helpers; all text set via textContent
   dashboard.js  assignments.js  assignment-form.js
   notes.js      note-form.js    calendar-widget.js      page controllers
+  calendar.js   settings.js     app-shell.js             shared Programmer 2 UI
+  session.js                                               local session behavior
 ```
 
 Data, business logic, and DOM rendering are kept in separate modules. The
@@ -84,6 +84,7 @@ the Assignments and Notes pages use.
 | `studentPlanner.assignments.v1` | `Assignment[]` |
 | `studentPlanner.notes.v1` | `Note[]` |
 | `studentPlanner.quickNote.v1` | `{ text: string, noteId: string \| null }` |
+| `studentPlanner.settings.v1` | calendar preferences and optional display name |
 
 Do not read these keys directly — import `storage` from `js/storage.js`, which
 validates and repairs the stored data on every read.

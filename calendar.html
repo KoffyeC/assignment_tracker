@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Calendar · Student Planner</title>
+    <link rel="stylesheet" href="css/shared.css" />
+    <link rel="stylesheet" href="css/calendar.css" />
+  </head>
+  <body data-section="calendar">
+    <div class="app">
+      <aside class="sidebar"></aside>
+
+      <main class="app-main">
+        <div class="page-header calendar-header">
+          <div>
+            <h1 class="page-title">Calendar</h1>
+            <p class="page-subtitle">View assignments by due date.</p>
+          </div>
+          <a class="btn btn--primary" href="assignment-form.html?return=calendar.html">+ Add Assignment</a>
+        </div>
+
+        <section class="card calendar-card" aria-labelledby="calendar-month-label">
+          <div class="calendar-toolbar">
+            <div class="calendar-toolbar__month-controls">
+              <button class="icon-button" id="previous-month" type="button" aria-label="Previous month">←</button>
+              <h2 class="calendar-toolbar__title" id="calendar-month-label"></h2>
+              <button class="icon-button" id="next-month" type="button" aria-label="Next month">→</button>
+            </div>
+            <button class="btn btn--secondary btn--compact" id="today-button" type="button">Today</button>
+          </div>
+          <div
+            class="calendar-page__grid"
+            id="calendar-page-grid"
+            role="grid"
+            aria-labelledby="calendar-month-label"
+          ></div>
+        </section>
+
+        <section class="card calendar-details" aria-labelledby="selected-date-label">
+          <div class="card__header">
+            <h2 class="card__title" id="selected-date-label"></h2>
+          </div>
+          <div id="selected-assignments"></div>
+        </section>
+      </main>
+    </div>
+
+    <script type="module" src="js/app-shell.js"></script>
+    <script type="module" src="js/calendar.js"></script>
+  </body>
+</html>

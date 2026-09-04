@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 
 import {
   assignmentCountsByDueDate,
+  assignmentsByDueDate,
   completedAssignments,
   knownClasses,
   notePreview,
@@ -146,6 +147,24 @@ test('assignmentCountsByDueDate skips records with an unusable date', () => {
     { id: 'b', dueDate: null },
   ]);
   assert.equal(counts.size, 0);
+});
+
+test('assignmentsByDueDate groups every assignment and can hide completed work', () => {
+  const dueDate = todayISODate();
+  const open = assignmentDueInDays(0, { id: 'open', name: 'Open', priority: 'Low' });
+  const urgent = assignmentDueInDays(0, { id: 'urgent', name: 'Urgent', priority: 'High' });
+  const done = assignmentDueInDays(0, { id: 'done', completed: true });
+
+  assert.deepEqual(
+    assignmentsByDueDate([open, done, urgent]).get(dueDate).map((item) => item.id),
+    ['urgent', 'done', 'open'],
+  );
+  assert.deepEqual(
+    assignmentsByDueDate([open, done, urgent], { includeCompleted: false })
+      .get(dueDate)
+      .map((item) => item.id),
+    ['urgent', 'open'],
+  );
 });
 
 test('knownClasses lists each class once, alphabetically', () => {

@@ -331,6 +331,37 @@ test('records are stored under the documented versioned keys', () => {
   assert.equal(STORAGE_KEYS.quickNote, 'studentPlanner.quickNote.v1');
 });
 
+test('planner settings have safe defaults and persist valid values', () => {
+  const backend = createFakeBackend();
+  const storage = createStorage(backend);
+
+  assert.deepEqual(storage.getSettings(), {
+    displayName: '',
+    weekStartsOn: 'sunday',
+    showCompletedOnCalendar: true,
+  });
+
+  const saved = storage.saveSettings({
+    displayName: '  Nathan  ',
+    weekStartsOn: 'monday',
+    showCompletedOnCalendar: false,
+  });
+  assert.equal(saved.ok, true);
+  assert.deepEqual(storage.getSettings(), {
+    displayName: 'Nathan',
+    weekStartsOn: 'monday',
+    showCompletedOnCalendar: false,
+  });
+  assert.equal(STORAGE_KEYS.settings, 'studentPlanner.settings.v1');
+});
+
+test('malformed planner settings fall back without throwing', () => {
+  const storage = createStorage(
+    createFakeBackend({ [STORAGE_KEYS.settings]: '{broken' }),
+  );
+  assert.equal(storage.getSettings().weekStartsOn, 'sunday');
+});
+
 test('invalid JSON does not crash a read', () => {
   const storage = createStorage(
     createFakeBackend({

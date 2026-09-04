@@ -23,10 +23,13 @@ renderDashboard();
 function renderDashboard() {
   const assignments = storage.getAssignments();
   const notes = storage.getNotes();
+  const settings = storage.getSettings();
 
   renderGreeting();
   renderUpcoming(assignments);
-  render(document.getElementById('calendar-widget'), [renderCalendarWidget(assignments)]);
+  render(document.getElementById('calendar-widget'), [
+    renderCalendarWidget(assignments, new Date(), settings.weekStartsOn === 'monday' ? 1 : 0),
+  ]);
   renderQuickNote();
   renderCompleted(assignments);
   renderRecentNotes(notes);
@@ -36,7 +39,9 @@ function renderDashboard() {
 function renderGreeting() {
   const hour = new Date().getHours();
   const partOfDay = hour < 12 ? 'morning' : hour < 18 ? 'afternoon' : 'evening';
-  document.getElementById('greeting').textContent = `Good ${partOfDay}! 👋`;
+  const { displayName } = storage.getSettings();
+  const name = displayName === '' ? '' : `, ${displayName}`;
+  document.getElementById('greeting').textContent = `Good ${partOfDay}${name}! 👋`;
 }
 
 /** @param {object[]} assignments */
