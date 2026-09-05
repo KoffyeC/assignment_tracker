@@ -1,7 +1,7 @@
 # Student Planner
 
 A student assignment, note, and calendar planner built with semantic HTML5, CSS, and vanilla
-JavaScript (ES modules). No frameworks, no build step, no dependencies.
+JavaScript (ES modules). No frameworks or build step are required for the application itself.
 
 ## Scope
 
@@ -35,10 +35,12 @@ Then open <http://localhost:8000/>.
 ## Testing
 
 ```bash
-npm test            # node --test "tests/**/*.test.js"
+npm test            # runs unit/integration, smoke, and regression tests
+npm run test:smoke       # Selenium smoke tests
+npm run test:regression  # Selenium regression tests
 ```
 
-Uses Node's built-in test runner — no framework is installed.
+Includes unit, smoke, and regression testing. Selenium WebDriver is included as a development dependency for automated QA testing.
 
 ## Pages
 

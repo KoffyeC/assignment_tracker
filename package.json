@@ -6,7 +6,9 @@
   "type": "module",
   "scripts": {
     "build": "node scripts/build-static.js",
-    "test": "node --test \"tests/**/*.test.js\"",
-    "serve": "python3 -m http.server 8000"
+    "test": "node --test \"tests/**/*.test.js\" && node --test \"selenium/smoke.test.js\" && node --test \"selenium/regression.test.js\"",
+    "serve": "python3 -m http.server 8000",
+    "test:smoke": "node --test \"selenium/smoke.test.js\"",
+    "test:regression": "node --test \"selenium/regression.test.js\""
   }
 }
