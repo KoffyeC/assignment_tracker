@@ -38,6 +38,7 @@ Then open <http://localhost:8000/>.
 npm test            # runs unit/integration, smoke, and regression tests
 npm run test:smoke       # Selenium smoke tests
 npm run test:regression  # Selenium regression tests
+npm run test:large-data  # Selenium large data test. Used for testing as the app utilizes local storage. 
 ```
 
 Includes unit, smoke, and regression testing. Selenium WebDriver is included as a development dependency for automated QA testing.
